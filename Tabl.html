@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIREXA BIO - Premium Peptides</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .navbar nav a {
+            color: #334155;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .navbar nav a:hover {
+            color: #1e3a5f;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            color: #334155;
+            font-size: 0.95rem;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 220px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            z-index: 1;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            color: #334155;
+            padding: 12px 20px;
+            display: block;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #f8fafc;
+            color: #1e3a5f;
+        }
+
+        .cart-btn {
+            background: #1e3a5f;
+            border: none;
+            padding: 8px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .cart-btn:hover {
+            background: #2c5282;
+            transform: scale(1.02);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1e3a5f;
+        }
+
+        .hero { 
+            position: relative; 
+            height: 100vh; 
+            min-height: 600px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+            color: white; 
+            overflow: hidden; 
+        } 
+        
+        .hero-image { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            z-index: 0; 
+        } 
+        
+        .hero-overlay { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: 1; 
+            /* background: rgba(0, 0, 0, 0.1); */
+        } 
+        
+        .hero-content { 
+            position: relative; 
+            right: 100px;
+            z-index: 2; 
+            max-width: 800px; 
+            padding: 0 20px; 
+            margin-top: 250px; 
+            margin-left: 500px;
+        }
+
+        /* .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        } */
+
+        .hero button {
+            background: #1e3a5f;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .hero button:hover {
+            background: #2c5282;
+            transform: scale(1.05);
+        }
+
+        .hero button a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 48px;
+            letter-spacing: -0.5px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #1e3a5f;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-badge.new {
+            background: #e67e22;
+        }
+
+        .product-badge.pro {
+            background: #7c3aed;
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            background: #f1f5f9;
+        }
+
+        .product h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .product .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a5f;
+            margin: 12px 0;
+        }
+
+        .product .old-price {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        .product p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .product button {
+            background: #1e3a5f;
+            border: none;
+            padding: 10px 24px;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .product button:hover {
+            background: #2c5282;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 28px 20px;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            border-color: #cbd5e1;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .brand-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.7;
+            color: #475569;
+        }
+
+        .trust-badge {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .trust-badge h3 {
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 1.3rem;
+            color: #1e293b;
+        }
+
+        .trust-items {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            text-align: center;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .review-stars {
+            color: #fbbf24;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .review-text {
+            font-style: italic;
+            margin-bottom: 16px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e3a5f;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 14px 20px;
+            }
+            
+            .navbar nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                flex-direction: column;
+                gap: 16px;
+                border-bottom: 1px solid #e2e8f0;
+                transform: translateY(-100%);
+                transition: transform 0.3s;
+                z-index: 999;
+                display: none;
+            }
+            
+            .mobile-menu.show {
+                display: flex;
+                transform: translateY(0);
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .benefits-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-items {
+                gap: 24px;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 32px;
+            }
+        }
+
+        .highlight {
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { background: #e0f2fe; }
+            100% { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">VIREXA BIO</div>
+    
+    <nav>
+        <a href="#products">Products</a>
+        <div class="dropdown">
+            <button class="dropbtn">Shop ▼</button>
+            <div class="dropdown-content">
+                <a href="#" data-product="Tirzepatide">Tirzepatide</a>
+                <a href="#" data-product="Retatrutide">Retatrutide</a>
+                <a href="#" data-product="NAD+">NAD+</a>
+                <a href="#" data-product="BPC-157">BPC-157</a>
+            </div>
+        </div>
+        <a href="#benefits">Why Us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="catalog.html">Catalog</a>
+    </nav>
+    
+    <button class="cart-btn" id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
+    <div class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#products" onclick="closeMobileMenu()">Products</a>
+    <a href="#benefits" onclick="closeMobileMenu()">Why Us</a>
+    <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
+    <a href="catalog.html" onclick="closeMobileMenu()">Catalog</a>
+</div>
+
+<section class="hero">
+    <img class="hero-image" src="foo.jpeg" alt="Hero background">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <button><a href="#products">Shop Now →</a></button>
+    </div>
+</section>
+
+<div class="container">
+    <section id="products">
+        <h2>Our Products</h2>
+        <div class="product-grid">
+            <div class="product" data-product-name="Testerone" data-price="59.99">
+                <div class="product-badge pro">Bestseller</div>
+                <img src="testt.jpeg" alt="BPC-157">
+                <h3>Testerone</h3>
+                <p>Recovery peptide for tissue repair</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-product-name="NAD+" data-price="59.99">
+                <div class="product-badge new">New</div>
+                <img src="557.jpeg" alt="BPC-157">
+                <h3>NAD+</h3>
+                <p>Recovery peptide for tissue repair</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-product-name="Clomifen" data-price="59.99">
+                <div class="product-badge pro">Popular</div>
+                <img src="555.jpeg" alt="BPC-157">
+                <h3>Clomifen</h3>
+                <p>Recovery peptide for tissue repair</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <h2>Why Choose VIREXA BIO</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>High Quality</h3>
+                <p>Premium pharmaceutical-grade compounds from certified labs</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Fast Shipping</h3>
+                <p>Express worldwide delivery with temperature control</p>
+            </div>
+            <div class="benefit-card">
+                <h3>100% Secure</h3>
+                <p>SSL-protected payments & encrypted data</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Lab-Tested</h3>
+                <p>Third-party verified purity analysis</p>
+            </div>
+            <div class="benefit-card">
+                <h3>High Purity</h3>
+                <p>99%+ purity by independent laboratories</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Research Grade</h3>
+                <p>cGMP certified facilities</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About VIREXA BIO</h2>
+        <div class="brand-content">
+            <p>VIREXA BIO is a premium biotech brand dedicated to providing the highest quality peptides for health, fitness, and longevity. Our products are manufactured in GMP-certified facilities and undergo rigorous third-party testing to ensure maximum purity and potency.</p>
+            <p style="margin-top: 20px;">We believe in science-backed solutions. Every VIREXA BIO product is formulated based on the latest clinical research, ensuring you get results you can trust. From recovery to anti-aging, our range covers the full spectrum of peptide science.</p>
+        </div>
+    </section>
+
+    <section id="trust">
+        <div class="trust-badge">
+            <h3>Why Trust VIREXA BIO</h3>
+            <div class="trust-items">
+                <div class="trust-item">99%+ Purity Rate</div>
+                <div class="trust-item">50K+ Happy Clients</div>
+                <div class="trust-item">24h Fast Dispatch</div>
+                <div class="trust-item">30-day Guarantee</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Outstanding quality. Noticed improvements in recovery within the first week."</p>
+                <p class="review-author">— Alex M.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Fast shipping and excellent customer service. The NAD+ product is a game-changer for my energy levels."</p>
+                <p class="review-author">— Sarah K.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Been using VIREXA BIO for 3 months. The purity is unmatched compared to other brands I've tried."</p>
+                <p class="review-author">— James R.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>© 2026 VIREXA BIO — Advanced Pharmaceutical Solutions</p>
+    <p style="margin-top: 8px;">For research purposes only. Not for human consumption.</p>
+</footer>
+
+<script>
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+    const cartCountSpan = document.getElementById('cartCount');
+    const cartBtn = document.getElementById('cartBtn');
+    
+    function updateCartCount() {
+        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountSpan.textContent = totalItems;
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+    
+    function showNotification(message, productName = '') {
+        const oldToast = document.querySelector('.toast');
+        if (oldToast) oldToast.remove();
+        
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = '✓ ' + message + (productName ? ': ' + productName : '');
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.remove(), 2000);
+    }
+    
+    function addToCart(productName, price, productElement = null) {
+        const existingItem = cartItems.find(item => item.name === productName);
+        
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cartItems.push({ name: productName, price: price, quantity: 1 });
+        }
+        
+        updateCartCount();
+        showNotification('Added to cart', productName);
+        
+        if (productElement) {
+            productElement.classList.add('highlight');
+            setTimeout(() => productElement.classList.remove('highlight'), 300);
+        }
+    }
+    
+    const addButtons = document.querySelectorAll('.add-to-cart');
+    addButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const productCard = event.target.closest('.product');
+            const productName = productCard.querySelector('h3').textContent;
+            const priceText = productCard.querySelector('.price').textContent;
+            const price = parseFloat(priceText.split('$')[1]);
+            addToCart(productName, price, productCard);
+            event.stopPropagation();
+        });
+    });
+    
+    const dropdownItems = document.querySelectorAll('.dropdown-content a');
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+            let productText = item.textContent.trim();
+            addToCart(productText, 49.99);
+            showNotification('Selected', productText);
+        });
+    });
+    
+    cartBtn.addEventListener('click', () => {
+        window.location.href = 'cart.html';
+    });
+    
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('show');
+    }
+    
+    function closeMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.remove('show');
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href === '' || href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                closeMobileMenu();
+            }
+        });
+    });
+    
+    updateCartCount();
+    window.addEventListener('storage', function(e) {
+    if (e.key === 'cartTotalCount') {
+        const cartCountSpan = document.getElementById('cartCount');
+        if (cartCountSpan) {
+            cartCountSpan.textContent = e.newValue || '0';
+        }
+    }
+});
+
+function updateCartCountFromStorage() {
+    const savedCount = localStorage.getItem('cartTotalCount');
+    const cartCountSpan = document.getElementById('cartCount');
+    if (cartCountSpan && savedCount) {
+        cartCountSpan.textContent = savedCount;
+    }
+}
+
+updateCartCountFromStorage();
+</script>
+</body>
+</html>
